@@ -30,6 +30,7 @@ If necessary:
     Create an SSH_PASSPHRASE secret for your ssh passkey.
 
 ## Configure  YAML (Eew) file 
+```
 name: simple-ci
 
 on:
@@ -40,7 +41,7 @@ jobs:
   pull-on-master:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy Fisheries App to dev server
+      - name: Deploy App to dev server
         uses: appleboy/ssh-action@master
         with:
           host: ${{secrets.SSH_HOST}}
@@ -48,10 +49,11 @@ jobs:
           username: ${{secrets.SSH_USER}}
           passphrase: ${{secrets.SSH_PASS}}
           script: |
-            cd /var/www/klrd-fisheries-app
+            cd /var/www/app_location
             git pull
             composer run-script reset
             echo 'Deployment to DO Dev Droplet successful'
+```
 
 ## Commit this script!
 Once you commit this to your repo, any pushes to the main branch will trigger
